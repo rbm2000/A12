@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Cookie Example</h1>
+<p>Click the button to set a cookie</p>
+<button onclick="setCookie()">Set Cookie</button>
+<p id="display"></p>
+
+<script>
+    function setCookie() {
+        document.cookie = "c=Set; expires=1 May 2023 12:00:00 UTC; path=/";
+        displayCookie();
+    }
+
+    function displayCookie() {
+        var cookieValue = getCookie("c");
+        var displayElement = document.getElementById("display");
+        displayElement.innerHTML = "Cookie value: " + cookieValue;
+    }
+
+    function getCookie(name) {
+        var cookieName = name + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var cookieArray = decodedCookie.split(';');
+        for (var i = 0; i < cookieArray.length; i++) {
+            var cookie = cookieArray[i];
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(cookieName) == 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return "";
+    }
+
+    window.onload = displayCookie;
+</script>
+</body>
+<footer>
+    <p>&copy; Riley MacFarlane April 11 2023</p>
+</footer>
+</html>
